@@ -5,4 +5,4 @@ I am trying to make this library more similar with System.IO.Ports.SerialPort.
 
 It useful in cases System.IO.Ports.SerialPort is not working well (for connecting to \\.\... devices)
 
-For having this library, you can download PInvokeSerialPort.dll or just simple download it from nuget :)
+For having this library, you can download PInvokeSerialPort.dll or just simply download it from nuget (https://nuget.org/packages/PInvokeSerialPort) :)
