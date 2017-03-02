@@ -711,8 +711,8 @@ namespace PInvokeSerialPort
             get { return _handShake; }
             set
             {
-                Handshake = value;
-                switch (Handshake)
+                _handShake = value;
+                switch (_handShake)
                 {
                     case Handshake.None:
                         TxFlowCts = false; TxFlowDsr = false; TxFlowX = false;
