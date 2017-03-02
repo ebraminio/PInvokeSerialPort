@@ -109,6 +109,8 @@ namespace PInvokeSerialPort
                                 Name = "CommBaseRx",
                                 Priority = ThreadPriority.AboveNormal
                             };
+            //If not set to true, my application process will not exit completely after UI closed
+            _rxThread.IsBackground = true;
             _rxThread.Start();
             Thread.Sleep(1); //Give rx thread time to start. By documentation, 0 should work, but it does not!
 
