@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>PInvokeSerialPort</id>
+    <version>1.0.1</version>
+    <authors>Ebrahim Byagowi</authors>
+    <owners>Ebrahim Byagowi</owners>
+    <projectUrl>https://github.com/ebraminio/PInvokeSerialPort</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/ebraminio/PInvokeSerialPort/master/ProjectIcon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>P/Invoke wrapper for Win32API serial port</description>
+    <releaseNotes>Fixing a couple of issues</releaseNotes>
+    <copyright>Copyright 2012-2017</copyright>
+    <tags>P/Invoke Serial Port SerialPort</tags>
+  </metadata>
+  <files>
+    <file src="PInvokeSerialPort\bin\Release\PInvokeSerialPort.dll" target="lib\PInvokeSerialPort.dll" />
+  </files>
+</package>
