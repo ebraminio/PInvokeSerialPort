@@ -1,8 +1,7 @@
 This library is a P/Invoke wrapper for Win32API serial port.
-Originally copied from http://msdn.microsoft.com/en-us/magazine/cc301786.aspx that I guess licensed under Ms-PL so this project will be also in Ms-PL.
-Please help me on completing APIs of this library, any suggestion is valued :)
-I am trying to make this library more similar with System.IO.Ports.SerialPort.
 
-It useful in cases System.IO.Ports.SerialPort is not working well (for connecting to \\.\... devices)
+Originally copied from http://msdn.microsoft.com/en-us/magazine/cc301786.aspx that I guess licensed under Ms-PL so this project is also under Ms-PL. (Update: well, after the years now I think this was not a true claim, but well I don't think MS will sue anyone because a sample intended for public use)
 
-For having this library, you can download PInvokeSerialPort.dll or just simply download it from nuget (https://nuget.org/packages/PInvokeSerialPort) :)
+It useful in cases System.IO.Ports.SerialPort is not working well (for connecting to \\\\.\\... devices)
+
+Download it from https://nuget.org/packages/PInvokeSerialPort :)
