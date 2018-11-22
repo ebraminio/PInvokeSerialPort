@@ -625,7 +625,7 @@ namespace PInvokeSerialPort
         /// <summary>
         /// Number of stop bits (default: one)
         /// </summary>
-        public StopBits StopBits = StopBits.one;
+        public StopBits StopBits = StopBits.One;
         /// <summary>
         /// If true, transmission is halted unless CTS is asserted by the remote station (default: false)
         /// </summary>
