@@ -144,7 +144,7 @@ namespace PInvokeSerialPort
         public ASCII XonChar = ASCII.DC1;
 
         /// <summary>
-        ///     Class contructor
+        ///     Class constructor
         /// </summary>
         public SerialPort(string portName)
         {
@@ -152,7 +152,7 @@ namespace PInvokeSerialPort
         }
 
         /// <summary>
-        ///     Class contructor
+        ///     Class constructor
         /// </summary>
         public SerialPort(string portName, int baudRate)
         {
@@ -316,6 +316,7 @@ namespace PInvokeSerialPort
             }
         }
 
+        /// <inheritdoc />
         /// <summary>
         ///     For IDisposable
         /// </summary>
@@ -555,15 +556,6 @@ namespace PInvokeSerialPort
         }
 
         /// <summary>
-        ///     Delay processing.
-        /// </summary>
-        /// <param name="milliseconds">Milliseconds to delay by</param>
-        protected void Sleep(int milliseconds)
-        {
-            Thread.Sleep(milliseconds);
-        }
-
-        /// <summary>
         ///     Gets the status of the modem control input signals.
         /// </summary>
         /// <returns>Modem status object</returns>
@@ -619,8 +611,7 @@ namespace PInvokeSerialPort
         /// <param name="ch">The byte that was received</param>
         protected void OnRxChar(byte ch)
         {
-            if (DataReceived != null)
-                DataReceived(ch);
+            DataReceived?.Invoke(ch);
         }
 
         /// <summary>
@@ -639,7 +630,7 @@ namespace PInvokeSerialPort
         }
 
         /// <summary>
-        ///     Override this to take action when a ring condition is signalled by an attached modem.
+        ///     Override this to take action when a ring condition is signaled by an attached modem.
         /// </summary>
         protected virtual void OnRing()
         {
