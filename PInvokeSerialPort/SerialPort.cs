@@ -401,7 +401,7 @@ namespace PInvokeSerialPort
             _checkSends = CheckAllSends;
             wo.Offset = 0;
             wo.OffsetHigh = 0;
-            wo.hEvent = _checkSends ? _writeEvent.Handle : IntPtr.Zero;
+            wo.hEvent = _checkSends ? _writeEvent.SafeWaitHandle.DangerousGetHandle() : IntPtr.Zero;
             _ptrUwo = Marshal.AllocHGlobal(Marshal.SizeOf(wo));
             Marshal.StructureToPtr(wo, _ptrUwo, true);
             _writeCount = 0;
@@ -686,7 +686,7 @@ namespace PInvokeSerialPort
             var unmanagedOv = Marshal.AllocHGlobal(Marshal.SizeOf(ov));
             ov.Offset = 0;
             ov.OffsetHigh = 0;
-            ov.hEvent = sg.Handle;
+            ov.hEvent = sg.SafeWaitHandle.DangerousGetHandle();
             Marshal.StructureToPtr(ov, unmanagedOv, true);
 
             uint eventMask = 0;
