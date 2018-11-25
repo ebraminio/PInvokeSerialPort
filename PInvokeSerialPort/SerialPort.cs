@@ -35,115 +35,6 @@ namespace PInvokeSerialPort
         public bool AutoReopen;
 
         /// <summary>
-        ///     Baud Rate (default: 2400) unsupported rates will throw "Bad settings"
-        /// </summary>
-        public int BaudRate = 115200;
-
-        /// <summary>
-        ///     If true, subsequent Send commands wait for completion of earlier ones enabling the results
-        ///     to be checked. If false, errors, including timeouts, may not be detected, but performance
-        ///     may be better.
-        /// </summary>
-        public bool CheckAllSends = true;
-
-        /// <summary>
-        ///     Number of databits 1..8 (default: 8) unsupported values will throw "Bad settings"
-        /// </summary>
-        public int DataBits = 8;
-
-        /// <summary>
-        ///     The parity checking scheme (default: none)
-        /// </summary>
-        public Parity Parity = Parity.None;
-
-        /// <summary>
-        ///     If true, Xon and Xoff characters are sent to control the data flow from the remote station (default: false)
-        /// </summary>
-        public bool RxFlowX;
-
-        /// <summary>
-        ///     If true, received characters are ignored unless DSR is asserted by the remote station (default: false)
-        /// </summary>
-        public bool RxGateDsr;
-
-        /// <summary>
-        ///     The number of free bytes in the reception queue at which flow is disabled (default: 2048)
-        /// </summary>
-        public int RxHighWater = 2048;
-
-        /// <summary>
-        ///     The number of bytes in the reception queue at which flow is re-enabled (default: 512)
-        /// </summary>
-        public int RxLowWater = 512;
-
-        /// <summary>
-        ///     Requested size for receive queue (default: 0 = use operating system default)
-        /// </summary>
-        public int RxQueue;
-
-        /// <summary>
-        ///     Constant.  Max time for Send in ms = (Multiplier * Characters) + Constant (default: 0)
-        /// </summary>
-        public int SendTimeoutConstant;
-
-        /// <summary>
-        ///     Multiplier. Max time for Send in ms = (Multiplier * Characters) + Constant
-        ///     (default: 0 = No timeout)
-        /// </summary>
-        public int SendTimeoutMultiplier;
-
-        /// <summary>
-        ///     Number of stop bits (default: one)
-        /// </summary>
-        public StopBits StopBits = StopBits.One;
-
-        /// <summary>
-        ///     If true, transmission is halted unless CTS is asserted by the remote station (default: false)
-        /// </summary>
-        public bool TxFlowCts;
-
-        /// <summary>
-        ///     If true, transmission is halted unless DSR is asserted by the remote station (default: false)
-        /// </summary>
-        public bool TxFlowDsr;
-
-        /// <summary>
-        ///     If true, transmission is halted when Xoff is received and restarted when Xon is received (default: false)
-        /// </summary>
-        public bool TxFlowX;
-
-        /// <summary>
-        ///     Requested size for transmit queue (default: 0 = use operating system default)
-        /// </summary>
-        public int TxQueue;
-
-        /// <summary>
-        ///     If false, transmission is suspended when this station has sent Xoff to the remote station (default: true)
-        ///     Set false if the remote station treats any character as an Xon.
-        /// </summary>
-        public bool TxWhenRxXoff = true;
-
-        /// <summary>
-        ///     Specidies the use to which the DTR output is put (default: none)
-        /// </summary>
-        public HsOutput UseDtr = HsOutput.None;
-
-        /// <summary>
-        ///     Specifies the use to which the RTS output is put (default: none)
-        /// </summary>
-        public HsOutput UseRts = HsOutput.None;
-
-        /// <summary>
-        ///     The character used to signal Xoff for X flow control (default: DC3)
-        /// </summary>
-        public ASCII XoffChar = ASCII.DC3;
-
-        /// <summary>
-        ///     The character used to signal Xon for X flow control (default: DC1)
-        /// </summary>
-        public ASCII XonChar = ASCII.DC1;
-
-        /// <summary>
         ///     Class constructor
         /// </summary>
         public SerialPort(string portName)
@@ -151,14 +42,124 @@ namespace PInvokeSerialPort
             PortName = portName;
         }
 
+        /// <inheritdoc />
         /// <summary>
         ///     Class constructor
         /// </summary>
-        public SerialPort(string portName, int baudRate)
+        public SerialPort(string portName, int baudRate) : this(portName)
         {
-            PortName = portName;
             BaudRate = baudRate;
         }
+
+        /// <summary>
+        ///     Baud Rate (default: 115200)
+        /// </summary>
+        /// <remarks>Unsupported rates will throw "Bad settings".</remarks>
+        public int BaudRate { get; set; } = 115200;
+
+        /// <summary>
+        ///     If true, subsequent Send commands wait for completion of earlier ones enabling the results
+        ///     to be checked. If false, errors, including timeouts, may not be detected, but performance
+        ///     may be better.
+        /// </summary>
+        public bool CheckAllSends { get; set; } = true;
+
+        /// <summary>
+        ///     Number of databits 1..8 (default: 8) unsupported values will throw "Bad settings"
+        /// </summary>
+        public int DataBits { get; set; } = 8;
+
+        /// <summary>
+        ///     The parity checking scheme (default: none)
+        /// </summary>
+        public Parity Parity { get; set; } = Parity.None;
+
+        /// <summary>
+        ///     If true, Xon and Xoff characters are sent to control the data flow from the remote station (default: false)
+        /// </summary>
+        public bool RxFlowX { get; set; }
+
+        /// <summary>
+        ///     If true, received characters are ignored unless DSR is asserted by the remote station (default: false)
+        /// </summary>
+        public bool RxGateDsr { get; set; }
+
+        /// <summary>
+        ///     The number of free bytes in the reception queue at which flow is disabled (default: 2048)
+        /// </summary>
+        public int RxHighWater { get; set; } = 2048;
+
+        /// <summary>
+        ///     The number of bytes in the reception queue at which flow is re-enabled (default: 512)
+        /// </summary>
+        public int RxLowWater { get; set; } = 512;
+
+        /// <summary>
+        ///     Requested size for receive queue (default: 0 = use operating system default)
+        /// </summary>
+        public int RxQueue { get; set; }
+
+        /// <summary>
+        ///     Constant.  Max time for Send in ms = (Multiplier * Characters) + Constant (default: 0)
+        /// </summary>
+        public int SendTimeoutConstant { get; set; }
+
+        /// <summary>
+        ///     Multiplier. Max time for Send in ms = (Multiplier * Characters) + Constant
+        ///     (default: 0 = No timeout)
+        /// </summary>
+        public int SendTimeoutMultiplier { get; set; }
+
+        /// <summary>
+        ///     Number of stop bits (default: one)
+        /// </summary>
+        public StopBits StopBits { get; set; } = StopBits.One;
+
+        /// <summary>
+        ///     If true, transmission is halted unless CTS is asserted by the remote station (default: false)
+        /// </summary>
+        public bool TxFlowCts { get; set; }
+
+        /// <summary>
+        ///     If true, transmission is halted unless DSR is asserted by the remote station (default: false)
+        /// </summary>
+        public bool TxFlowDsr { get; set; }
+
+        /// <summary>
+        ///     If true, transmission is halted when Xoff is received and restarted when Xon is received (default: false)
+        /// </summary>
+        public bool TxFlowX { get; set; }
+
+        /// <summary>
+        ///     Requested size for transmit queue (default: 0 = use operating system default)
+        /// </summary>
+        public int TxQueue { get; set; }
+
+        /// <summary>
+        ///     If false, transmission is suspended when this station has sent Xoff to the remote station (default: true)
+        ///     Set false if the remote station treats any character as an Xon.
+        /// </summary>
+        public bool TxWhenRxXoff { get; set; } = true;
+
+        /// <summary>
+        ///     Specidies the use to which the DTR output is put (default: none)
+        /// </summary>
+        public HsOutput UseDtr { get; set; } = HsOutput.None;
+
+        /// <summary>
+        ///     Specifies the use to which the RTS output is put (default: none)
+        /// </summary>
+        public HsOutput UseRts { get; set; } = HsOutput.None;
+
+        /// <summary>
+        ///     The character used to signal Xoff for X flow control (default: DC3)
+        /// </summary>
+        public ASCII XoffChar { get; set; } = ASCII.DC3;
+
+        /// <summary>
+        ///     The character used to signal Xon for X flow control (default: DC1)
+        /// </summary>
+        public ASCII XonChar { get; set; } = ASCII.DC1;
 
         /// <summary>
         ///     True if online.
@@ -586,7 +587,7 @@ namespace PInvokeSerialPort
         }
 
         /// <summary>
-        ///     Override this to provide processing after the port is openned (i.e. to configure remote
+        ///     Override this to provide processing after the port is opened (i.e. to configure remote
         ///     device or just check presence).
         /// </summary>
         /// <returns>false to close the port again</returns>
@@ -695,7 +696,7 @@ namespace PInvokeSerialPort
                             if ((errs & Win32Com.CE_FRAME) != 0) s = s.Append("Framing,");
                             if ((errs & Win32Com.CE_IOE) != 0) s = s.Append("IO,");
                             if ((errs & Win32Com.CE_OVERRUN) != 0) s = s.Append("Overrun,");
-                            if ((errs & Win32Com.CE_RXOVER) != 0) s = s.Append("Receive Cverflow,");
+                            if ((errs & Win32Com.CE_RXOVER) != 0) s = s.Append("Receive Overflow,");
                             if ((errs & Win32Com.CE_RXPARITY) != 0) s = s.Append("Parity,");
                             if ((errs & Win32Com.CE_TXFULL) != 0) s = s.Append("Transmit Overflow,");
                             s.Length = s.Length - 1;
