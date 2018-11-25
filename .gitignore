@@ -31,3 +31,5 @@ _ReSharper*/
 *.nupkg
 /.vs
 /packages
+/.tmp
+*.DotSettings
