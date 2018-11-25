@@ -5,3 +5,11 @@ install:
 build_script:
 - ps: .\build.ps1
 test: off
+artifacts:
+- path: 'PInvokeSerialPort\bin\**\*.nupkg'
+deploy:
+- provider: Environment
+  name: nuget.org
+  on:
+    branch: master
+    appveyor_repo_tag: true 
