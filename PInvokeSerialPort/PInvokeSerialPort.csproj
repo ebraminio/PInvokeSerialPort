@@ -5,6 +5,11 @@
     <Authors>Ebrahim Byagowi, Benjamin Höglinger-Stelzer</Authors>
     <PackageProjectUrl>https://github.com/nefarius/PInvokeSerialPort</PackageProjectUrl>
     <RepositoryUrl>https://github.com/nefarius/PInvokeSerialPort</RepositoryUrl>
+    <PackageId>Nefarius.PInvokeSerialPort</PackageId>
+    <Description>P/Invoke wrapper for Win32API serial port</Description>
+    <Copyright>Copyright 2012-2017 Ebrahim Byagowi, 2018 Benjamin Höglinger-Stelzer</Copyright>
+    <PackageIconUrl>https://raw.githubusercontent.com/Nefarius/PInvokeSerialPort/master/ProjectIcon.png</PackageIconUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/nefarius/PInvokeSerialPort/master/LICENSE</PackageLicenseUrl>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
