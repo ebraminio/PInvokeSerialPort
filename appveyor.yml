@@ -1,0 +1,6 @@
+version: 1.0.{build}
+image: Visual Studio 2017
+install:
+- cmd: git submodule -q update --init
+build_script:
+- ps: .\build.ps1
