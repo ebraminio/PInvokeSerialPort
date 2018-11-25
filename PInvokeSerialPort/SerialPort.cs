@@ -12,6 +12,8 @@ namespace PInvokeSerialPort
     /// </summary>
     public class SerialPort : IDisposable
     {
+        #region Private fields
+
         private readonly ManualResetEvent _writeEvent = new ManualResetEvent(false);
         private bool _auto;
         private bool _checkSends = true;
@@ -28,11 +30,9 @@ namespace PInvokeSerialPort
         private int _stateRts = 2;
         private int _writeCount;
 
-        /// <summary>
-        ///     If true, the port will automatically re-open on next send if it was previously closed due
-        ///     to an error (default: false)
-        /// </summary>
-        public bool AutoReopen;
+        #endregion
+
+        #region Public properties
 
         /// <summary>
         ///     Class constructor
@@ -50,6 +50,12 @@ namespace PInvokeSerialPort
         {
             BaudRate = baudRate;
         }
+
+        /// <summary>
+        ///     If true, the port will automatically re-open on next send if it was previously closed due
+        ///     to an error (default: false)
+        /// </summary>
+        public bool AutoReopen { get; set; }
 
         /// <summary>
         ///     Baud Rate (default: 115200)
@@ -317,6 +323,8 @@ namespace PInvokeSerialPort
             }
         }
 
+        #endregion
+
         /// <inheritdoc />
         /// <summary>
         ///     For IDisposable
@@ -370,10 +378,25 @@ namespace PInvokeSerialPort
             if (!Win32Com.SetCommTimeouts(_hPort, ref commTimeouts)) ThrowException("Bad timeout settings");
 
             _stateBrk = 0;
-            if (UseDtr == HsOutput.None) _stateDtr = 0;
-            if (UseDtr == HsOutput.Online) _stateDtr = 1;
-            if (UseRts == HsOutput.None) _stateRts = 0;
-            if (UseRts == HsOutput.Online) _stateRts = 1;
+            switch (UseDtr)
+            {
+                case HsOutput.None:
+                    _stateDtr = 0;
+                    break;
+                case HsOutput.Online:
+                    _stateDtr = 1;
+                    break;
+            }
+
+            switch (UseRts)
+            {
+                case HsOutput.None:
+                    _stateRts = 0;
+                    break;
+                case HsOutput.Online:
+                    _stateRts = 1;
+                    break;
+            }
 
             _checkSends = CheckAllSends;
             wo.Offset = 0;
@@ -385,13 +408,13 @@ namespace PInvokeSerialPort
 
             _rxException = null;
             _rxExceptionReported = false;
+            
+            // TODO: utilize Task Parallel Library here
             _rxThread = new Thread(ReceiveThread)
             {
-                Name = "CommBaseRx",
-                Priority = ThreadPriority.AboveNormal
+                Name = "CommBaseRx", Priority = ThreadPriority.AboveNormal, IsBackground = true
             };
-            //If not set to true, my application process will not exit completely after UI closed
-            _rxThread.IsBackground = true;
+            
             _rxThread.Start();
             Thread.Sleep(1); //Give rx thread time to start. By documentation, 0 should work, but it does not!
 
