@@ -1,9 +1,19 @@
 version: 1.0.{build}
 image: Visual Studio 2019
+configuration:
+- Release
 install:
 - cmd: git submodule -q update --init
-build_script:
-- ps: .\build.ps1
+dotnet_csproj:
+  patch: true
+  file: '**\*.csproj'
+  version: '{version}'
+  package_version: '{version}'
+  assembly_version: '{version}'
+  file_version: '{version}'
+  informational_version: '{version}'
+build:
+  project: $(APPVEYOR_BUILD_FOLDER)\$(APPVEYOR_PROJECT_NAME).sln
 test: off
 artifacts:
 - path: '$(APPVEYOR_PROJECT_NAME)\bin\**\*.nupkg'
