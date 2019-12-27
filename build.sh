@@ -2,16 +2,6 @@
 
 echo $(bash --version 2>&1 | head -n 1)
 
-#CUSTOMPARAM=0
-BUILD_ARGUMENTS=()
-for i in "$@"; do
-    case $(echo $1 | awk '{print tolower($0)}') in
-        # -custom-param) CUSTOMPARAM=1;;
-        *) BUILD_ARGUMENTS+=("$1") ;;
-    esac
-    shift
-done
-
 set -eo pipefail
 SCRIPT_DIR=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
 
@@ -28,23 +18,25 @@ DOTNET_CHANNEL="Current"
 
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1
-export NUGET_XMLDOC_MODE="skip"
 
 ###########################################################################
 # EXECUTION
 ###########################################################################
 
 function FirstJsonValue {
-    perl -nle 'print $1 if m{"'$1'": "([^"\-]+)",?}' <<< ${@:2}
+    perl -nle 'print $1 if m{"'$1'": "([^"]+)",?}' <<< ${@:2}
 }
 
 # If global.json exists, load expected version
 if [ -f "$DOTNET_GLOBAL_FILE" ]; then
     DOTNET_VERSION=$(FirstJsonValue "version" $(cat "$DOTNET_GLOBAL_FILE"))
+    if [ "$DOTNET_VERSION" == ""  ]; then
+        unset DOTNET_VERSION
+    fi
 fi
 
 # If dotnet is installed locally, and expected version is not set or installation matches the expected version
-if [[ -x "$(command -v dotnet)" && (-z ${DOTNET_VERSION+x} || $(dotnet --version) == "$DOTNET_VERSION") ]]; then
+if [[ -x "$(command -v dotnet)" && (-z ${DOTNET_VERSION+x} || $(dotnet --version 2>&1) == "$DOTNET_VERSION") ]]; then
     export DOTNET_EXE="$(command -v dotnet)"
 else
     DOTNET_DIRECTORY="$TEMP_DIRECTORY/dotnet-unix"
@@ -66,4 +58,5 @@ fi
 
 echo "Microsoft (R) .NET Core SDK version $("$DOTNET_EXE" --version)"
 
-"$DOTNET_EXE" run --project "$BUILD_PROJECT_FILE" -- ${BUILD_ARGUMENTS[@]}
+"$DOTNET_EXE" build "$BUILD_PROJECT_FILE" /nodeReuse:false
+"$DOTNET_EXE" run --project "$BUILD_PROJECT_FILE" --no-build -- "$@"

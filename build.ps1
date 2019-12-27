@@ -1,11 +1,10 @@
 [CmdletBinding()]
 Param(
-    #[switch]$CustomParam,
     [Parameter(Position=0,Mandatory=$false,ValueFromRemainingArguments=$true)]
     [string[]]$BuildArguments
 )
 
-Write-Output "Windows PowerShell $($Host.Version)"
+Write-Output "PowerShell $($PSVersionTable.PSEdition) version $($PSVersionTable.PSVersion)"
 
 Set-StrictMode -Version 2.0; $ErrorActionPreference = "Stop"; $ConfirmPreference = "None"; trap { exit 1 }
 $PSScriptRoot = Split-Path $MyInvocation.MyCommand.Path -Parent
@@ -23,7 +22,6 @@ $DotNetChannel = "Current"
 
 $env:DOTNET_SKIP_FIRST_TIME_EXPERIENCE = 1
 $env:DOTNET_CLI_TELEMETRY_OPTOUT = 1
-$env:NUGET_XMLDOC_MODE = "skip"
 
 ###########################################################################
 # EXECUTION
@@ -36,11 +34,14 @@ function ExecSafe([scriptblock] $cmd) {
 
 # If global.json exists, load expected version
 if (Test-Path $DotNetGlobalFile) {
-    $DotNetVersion = $(Get-Content $DotNetGlobalFile | Out-String | ConvertFrom-Json).sdk.version
+    $DotNetGlobal = $(Get-Content $DotNetGlobalFile | Out-String | ConvertFrom-Json)
+    if ($DotNetGlobal.PSObject.Properties["sdk"] -and $DotNetGlobal.sdk.PSObject.Properties["version"]) {
+        $DotNetVersion = $DotNetGlobal.sdk.version
+    }
 }
 
 # If dotnet is installed locally, and expected version is not set or installation matches the expected version
-if ((Get-Command "dotnet" -ErrorAction SilentlyContinue) -ne $null -and `
+if ($null -ne (Get-Command "dotnet" -ErrorAction SilentlyContinue) -and `
      (!(Test-Path variable:DotNetVersion) -or $(& dotnet --version) -eq $DotNetVersion)) {
     $env:DOTNET_EXE = (Get-Command "dotnet").Path
 }
@@ -50,7 +51,7 @@ else {
 
     # Download install script
     $DotNetInstallFile = "$TempDirectory\dotnet-install.ps1"
-    md -force $TempDirectory > $null
+    New-Item -ItemType Directory -Path $TempDirectory | Out-Null
     (New-Object System.Net.WebClient).DownloadFile($DotNetInstallUrl, $DotNetInstallFile)
 
     # Install by channel or version
@@ -63,4 +64,5 @@ else {
 
 Write-Output "Microsoft (R) .NET Core SDK version $(& $env:DOTNET_EXE --version)"
 
-ExecSafe { & $env:DOTNET_EXE run --project $BuildProjectFile -- $BuildArguments }
+ExecSafe { & $env:DOTNET_EXE build $BuildProjectFile /nodeReuse:false }
+ExecSafe { & $env:DOTNET_EXE run --project $BuildProjectFile --no-build -- $BuildArguments }
