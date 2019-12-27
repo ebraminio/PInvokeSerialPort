@@ -1,12 +1,12 @@
 version: 1.0.{build}
-image: Visual Studio 2017
+image: Visual Studio 2019
 install:
 - cmd: git submodule -q update --init
 build_script:
 - ps: .\build.ps1
 test: off
 artifacts:
-- path: 'PInvokeSerialPort\bin\**\*.nupkg'
+- path: '$(APPVEYOR_PROJECT_NAME)\bin\**\*.nupkg'
 deploy:
 - provider: Environment
   name: nuget.org
