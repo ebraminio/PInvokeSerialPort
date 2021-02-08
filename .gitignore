@@ -28,4 +28,8 @@ obj/
 _ReSharper*/
 [Tt]est[Rr]esult*
 *.testsettings
-PInvokeSerialPort.nupkg
+*.nupkg
+/.vs
+/packages
+/.tmp
+*.DotSettings
