@@ -1,6 +1,8 @@
-<img src="assets/NSS-128x128.png" align="right" />
+﻿<img src="assets/NSS-128x128.png" align="right" />
 
 # Nefarius.Peripherals.SerialPort
+
+`System.IO.Ports.SerialPort` but actually works 😏
 
 ## About
 
@@ -14,4 +16,4 @@ It is useful in the cases System.IO.Ports.SerialPort is not working well (for co
 
 ## Download
 
-Consume the NuGet via `Install-Package Nefarius.PInvokeSerialPort`
+Consume the NuGet via `Install-Package Nefarius.Peripherals.SerialPort`
