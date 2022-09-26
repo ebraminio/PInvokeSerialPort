@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO.Ports;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading;
