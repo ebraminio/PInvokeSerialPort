@@ -1,4 +1,4 @@
-﻿namespace PInvokeSerialPort
+﻿namespace Nefarius.Peripherals.SerialPort
 {
     /// <summary>
     ///     Stop bit settings

@@ -5,7 +5,7 @@
     <Authors>Ebrahim Byagowi, Benjamin Höglinger-Stelzer</Authors>
     <PackageProjectUrl>https://github.com/nefarius/PInvokeSerialPort</PackageProjectUrl>
     <RepositoryUrl>https://github.com/nefarius/PInvokeSerialPort</RepositoryUrl>
-    <PackageId>Nefarius.PInvokeSerialPort</PackageId>
+    <PackageId>Nefarius.Peripherals.SerialPort</PackageId>
     <Description>P/Invoke wrapper for Win32API serial port</Description>
     <Copyright>Copyright 2012-2017 Ebrahim Byagowi, 2018-2022 Benjamin Höglinger-Stelzer</Copyright>
     <PackageIconUrl>https://raw.githubusercontent.com/Nefarius/PInvokeSerialPort/master/ProjectIcon.png</PackageIconUrl>
@@ -14,6 +14,7 @@
     <OutputPath>$(SolutionDir)bin\</OutputPath>
     <PackageIcon>NSS-128x128.png</PackageIcon>
     <PackageIconUrl />
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>

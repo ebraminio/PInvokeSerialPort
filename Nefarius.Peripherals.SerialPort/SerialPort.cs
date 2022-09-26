@@ -2,9 +2,9 @@
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
-using PInvokeSerialPort.Win32PInvoke;
+using Nefarius.Peripherals.SerialPort.Win32PInvoke;
 
-namespace PInvokeSerialPort
+namespace Nefarius.Peripherals.SerialPort
 {
     /// <summary>
     ///     PInvokeSerialPort main class.

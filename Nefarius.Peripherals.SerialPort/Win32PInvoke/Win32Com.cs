@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace PInvokeSerialPort.Win32PInvoke
+namespace Nefarius.Peripherals.SerialPort.Win32PInvoke
 {
     internal class Win32Com
     {
