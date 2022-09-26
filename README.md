@@ -1,4 +1,6 @@
-P/Invoke wrapper for Win32API serial port
+<img src="assets/NSS-128x128.png" align="right" />
+
+# Nefarius.Peripherals.SerialPort
 
 Originally copied from http://msdn.microsoft.com/en-us/magazine/cc301786.aspx that I guess licensed under Ms-PL so this project is also under Ms-PL. (Update: well, after the years now I think this was not a true claim, but well I don't think MS will sue anyone because a sample intended for public use)
 
