@@ -2,7 +2,7 @@
 
 # Nefarius.Peripherals.SerialPort
 
-`System.IO.Ports.SerialPort` but actually works 😏
+Like `System.IO.Ports.SerialPort` but actually works 😏
 
 ## About
 
