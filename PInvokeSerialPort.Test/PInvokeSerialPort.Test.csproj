@@ -53,7 +53,7 @@
     <Compile Include="PInvokeSerialPortTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PInvokeSerialPort\PInvokeSerialPort.csproj">
+    <ProjectReference Include="..\Nefarius.Peripherals.SerialPort\Nefarius.Peripherals.SerialPort.csproj">
       <Project>{AEC711A5-AA9B-4127-A82C-C4D8FDA9741A}</Project>
       <Name>PInvokeSerialPort</Name>
     </ProjectReference>

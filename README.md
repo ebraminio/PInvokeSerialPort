@@ -1,4 +1,6 @@
-# P/Invoke wrapper for Win32API serial port
+<img src="assets/NSS-128x128.png" align="right" />
+
+# Nefarius.Peripherals.SerialPort
 
 ## About
 

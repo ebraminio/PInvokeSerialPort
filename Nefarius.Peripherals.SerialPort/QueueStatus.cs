@@ -1,7 +1,7 @@
 ﻿using System.Text;
-using PInvokeSerialPort.Win32PInvoke;
+using Nefarius.Peripherals.SerialPort.Win32PInvoke;
 
-namespace PInvokeSerialPort
+namespace Nefarius.Peripherals.SerialPort
 {
     /// <summary>
     ///     Represents the current condition of the port queues.
