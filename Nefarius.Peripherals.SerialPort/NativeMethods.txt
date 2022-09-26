@@ -1,0 +1,16 @@
+﻿CreateFile
+GetHandleInformation
+SetCommState
+SetCommTimeouts
+SetupComm
+WriteFile
+SetCommMask
+WaitCommEvent
+CancelIo
+ReadFile
+TransmitCommChar
+EscapeCommFunction
+GetCommModemStatus
+GetOverlappedResult
+ClearCommError
+GetCommProperties

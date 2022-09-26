@@ -3,6 +3,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Ebrahim Byagowi, Benjamin Höglinger-Stelzer</Authors>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <PackageProjectUrl>https://github.com/nefarius/PInvokeSerialPort</PackageProjectUrl>
     <RepositoryUrl>https://github.com/nefarius/PInvokeSerialPort</RepositoryUrl>
     <PackageId>Nefarius.Peripherals.SerialPort</PackageId>
@@ -26,5 +27,11 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Windows.CsWin32" Version="0.2.63-beta">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 </Project>
