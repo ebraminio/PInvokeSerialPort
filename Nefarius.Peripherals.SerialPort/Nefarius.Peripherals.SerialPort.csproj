@@ -11,8 +11,19 @@
     <PackageIconUrl>https://raw.githubusercontent.com/Nefarius/PInvokeSerialPort/master/ProjectIcon.png</PackageIconUrl>
     <PackageLicenseUrl>https://raw.githubusercontent.com/nefarius/PInvokeSerialPort/master/LICENSE</PackageLicenseUrl>
     <Version>1.0.0</Version>
+    <OutputPath>$(SolutionDir)bin\</OutputPath>
+    <PackageIcon>NSS-128x128.png</PackageIcon>
+    <PackageIconUrl />
   </PropertyGroup>
+
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\assets\NSS-128x128.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 </Project>
